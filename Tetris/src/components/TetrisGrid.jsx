@@ -11,11 +11,9 @@ const TetrisGrid = () => {
     return (
         <>
             <div className="flex justify-center items-center">
-                <div className="grid grid-cols-10 bg-gray-500 w-max shadow-2xl">
+                <div className="grid grid-cols-10 w-max shadow-2xl">
                     {board.flat().map((cell, index) => (
-                        <div key={index} className={`w-8 h-8 border border-gray-600 ${cell == 0 ? `bg-gray-300` : `bg-red-500`}`}>
-
-                        </div>
+                        <div key={index} className={`w-8 h-8 border border-gray-700 ${cell == 0 ? `bg-transparent` : `bg-red-500`}`}></div>
                     ))}
                 </div>
             </div>

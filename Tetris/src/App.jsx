@@ -5,12 +5,12 @@ import TetrisGamePage from './pages/TetrisGamePage'
 //import './App.css'
 
 function App() {
-
-  return (
-    <>
-      <TetrisGamePage></TetrisGamePage>
-    </>
-  )
+    
+    return (
+        <>
+            <TetrisGamePage></TetrisGamePage>
+        </>
+    )
 }
 
 export default App
