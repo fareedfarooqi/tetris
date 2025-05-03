@@ -46,7 +46,7 @@ const TetrisGamePage = () => {
                     <div className="flex justify-center text-5xl uppercase font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse">Welcome to Tetris</div>
 
                     <div className="flex gap-5">
-                        {shape && <TetrisGrid shapeKey={shape} posOfShape={posOfShape} setPosOfShape={setPosOfShape} spawnNewShape={spawnNewShape} shapeMatrix={shapeMatrix} setShape={setShape} setShapeMatrix={setShapeMatrix} nextShape={nextShape} />}
+                        {shape && <TetrisGrid posOfShape={posOfShape} setPosOfShape={setPosOfShape} spawnNewShape={spawnNewShape} shapeMatrix={shapeMatrix} setShapeMatrix={setShapeMatrix} setPoints={setPoints} setLines={setLines} />}
                         {shape && <StatusBox points={points} lines={lines} shapeKey={nextShape} />}
                     </div>
                 </div>
