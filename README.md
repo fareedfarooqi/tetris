@@ -84,6 +84,13 @@ Use your keyboard or the on-screen buttons:
 
 ## 📷 Screenshots
 
+![Screenshot 2025-05-04 at 1 14 51 am](https://github.com/user-attachments/assets/2de7552e-4a0a-4f27-b780-59a261b93454)
+
+![Screenshot 2025-05-04 at 1 15 22 am](https://github.com/user-attachments/assets/48369172-bddf-4dba-89ac-cf3698f4e21d)
+
+![Screenshot 2025-05-04 at 1 16 19 am](https://github.com/user-attachments/assets/bbb9fe68-b555-447e-a2d0-1bd27daf1c51)
+
+![Screenshot 2025-05-04 at 1 17 24 am](https://github.com/user-attachments/assets/dd366e6b-1ef7-4eaa-9056-5192ca2915f3)
 
 
 ## 📝 Next Steps / To-Do
