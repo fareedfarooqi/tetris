@@ -12,6 +12,20 @@ const TetrisGamePage = () => {
     const [nextShape, setNextShape] = useState(null);
 
     const spawnNewShape = () => {
+        setShape(nextShape);
+        setShapeMatrix(shapes[nextShape]);
+        
+        const shapeKeys = Object.keys(shapes);
+        // We need a randomiser to randomly select a shape. Note that Math.random() gives a random value
+        // between 0 and 1. We then multiply that value by the length of the dictionary of our shapes and floor it.
+        const shapeIndexNext = Math.floor(Math.random() * Object.keys(shapes).length);
+        const randomShapeKeyNext = shapeKeys[shapeIndexNext];
+        setNextShape(randomShapeKeyNext);
+    };
+    
+    // Upon mounting I wanna set the shape the game begins with.
+    // We will then subsequently update the shape after it is 'used' elsewhere in the code.
+    useEffect(() => {
         const shapeKeys = Object.keys(shapes);
         // We need a randomiser to randomly select a shape. Note that Math.random() gives a random value
         // between 0 and 1. We then multiply that value by the length of the dictionary of our shapes and floor it.
@@ -20,14 +34,10 @@ const TetrisGamePage = () => {
         setShapeMatrix(shapes[randomShapeKeyCur]);
         setShape(randomShapeKeyCur);
 
-        // Now we can also set the nextShape.
         const nextShapeIndex = Math.floor(Math.random() * Object.keys(shapes).length);
         const nextRandomShapeKey = shapeKeys[nextShapeIndex];
         setNextShape(nextRandomShapeKey);
-    };
-    // Upon mounting I wanna set the shape the game begins with.
-    // We will then subsequently update the shape after it is 'used' elsewhere in the code.
-    useEffect(spawnNewShape, [shape]);
+    }, []);
 
     return (
         <>

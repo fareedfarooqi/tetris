@@ -1,6 +1,15 @@
 // This will indicate that a cell is empty.
 const EMPTY = 0;
 
+let shapeColours = {
+    0: "bg-gradient-to-br from-gray-900 to-gray-800",
+    1: "bg-red-500",
+    2: "bg-blue-300",
+    3: "bg-indigo-400",
+    4: "bg-orange-400",
+    5: "bg-green-300"
+};
+
 const shapes = {
     I: [
         [1, 1, 1, 1],
@@ -98,8 +107,8 @@ const canPlace = (board, shape, offsetX, offsetY) => {
             // Boundary checks.
 
             if (newX < 0 || newX > boardWidth - 1 || newY < 0 || newY > boardHeight - 1) {
-                console.log("111111")
-                console.log(`${newX} > ${boardWidth} AND ${newY} > ${boardHeight}`)
+                //console.log("111111")
+                //console.log(`${newX} > ${boardWidth} AND ${newY} > ${boardHeight}`)
 
                 return false;
             }
@@ -107,7 +116,7 @@ const canPlace = (board, shape, offsetX, offsetY) => {
             // This cell is already occupied.
             if (board[newY][newX] != EMPTY) {
                 //console.log(`${newY}${newX} --> ${board[newY][newX]}`)
-                console.log("2222222")
+                //console.log("2222222")
 
                 return false;
             }
@@ -142,4 +151,38 @@ const mergePiece = (board, shape, offsetX, offsetY) => {
     return newBoard;
 }
 
-export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW, canPlace, mergePiece };
+const lastRowIsFilled = (board) => {
+    const boardHeight = board.length;
+    const boardWidth = board[0].length;
+
+    // We don't need a double for-loop to verify due to the fact the last row will always exist.
+    // So we can just check the last row and see if it is fully blocked. If it is we can clean that row.
+    // We add points for clearing the row.
+    console.log("==========");
+    console.log(boardWidth)
+    for (let i = 0; i < boardWidth; i++) {
+        if (board[boardHeight - 1][i] == EMPTY) {
+            // This implies that a cell is EMPTY i.e., no shape is in this cell's position. Thus we know
+            // that the user cannot gain any points as the last row is not clear.
+            return false;
+        }
+    }
+    return true;
+}
+
+const clearLastRow = (oldBoard) => {
+    const boardHeight = oldBoard.length;
+    const boardWidth = oldBoard[0].length;
+    // Otherwise we know last row is filled so we can clear it out.
+    let newBoard = createEmptyBoard()
+
+    for (let y = 0; y < boardHeight - 1; y++) {
+        for (let x = 0; x < boardWidth; x++) {
+            newBoard[y + 1][x] = oldBoard[y][x];
+        }
+    }
+
+    return newBoard;
+}
+
+export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW, canPlace, mergePiece, lastRowIsFilled, shapeColours, clearLastRow };
