@@ -78,4 +78,65 @@ const rotateCW = (shape) => {
     return newShapeMatrix;
 }
 
-export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW };
+// The reason for the offset is because we need to be able to MOVE it not just place a piece.
+const canPlace = (board, shape, offsetX, offsetY) => {
+    // We need to loop through the shape itself and see if there is a free EMPTY
+    // cell in the board grid where we can place the shape cell in.
+    const boardWidth = board[0].length;
+    const boardHeight = board.length;
+
+    // Here 'y' represents rows and 'x' represents columns.
+    for (let y = 0; y < shape.length; y++) {
+        for (let x = 0; x < shape[0].length; x++) {
+            let newX = offsetX + x; // New 'column' coordinate. 
+            let newY = offsetY + y; // New 'row' coordinate.
+            
+            if (shape[y][x] == EMPTY) {
+                continue;
+            }
+            
+            // Boundary checks.
+            if (newX < 0 || newX > boardWidth || newY < 0 || newY > boardHeight) {
+                console.log("1")
+                return false;
+            }
+
+            // This cell is already occupied.
+            if (board[newY][newX] != EMPTY) {
+                console.log(`${newY}${newX} --> ${board[newY][newX]}`)
+                console.log("2")
+
+                return false;
+            }
+
+            /*if (board[newY][newX] == EMPTY && shape[y][x] != EMPTY) {
+                // Board cell is empty meaning we can place VALID shape piece here.
+                // By valid I mean that the shape's matrix cell is not empty.
+                board[newY][newX] = shape[y][x];
+            }*/
+        }
+    }
+    return true;
+}
+
+const mergePiece = (board, shape, offsetX, offsetY) => {
+    // We need to make a deep copy of our board. Remember that React can only essentially see deep changes.
+    let newBoard = board.map(row => [...row]);
+    const boardWidth = board[0].length;
+    const boardHeight = board.length;
+
+    for (let y = 0; y < shape.length; y++) {
+        for (let x = 0; x < shape[0].length; x++) {
+            if (shape[y][x] === EMPTY) {
+                continue;
+            }
+            let newX = offsetX + x;
+            let newY = offsetY + y;
+            console.log(`It is ${newX} = ${offsetX} + ${x}  --  ${newY} --> ${newBoard[newY][newX]}`)
+            newBoard[newY][newX] = shape[y][x];
+        }
+    }
+    return newBoard;
+}
+
+export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW, canPlace, mergePiece };
