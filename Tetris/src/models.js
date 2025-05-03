@@ -105,19 +105,12 @@ const canPlace = (board, shape, offsetX, offsetY) => {
             }
             
             // Boundary checks.
-
             if (newX < 0 || newX > boardWidth - 1 || newY < 0 || newY > boardHeight - 1) {
-                //console.log("111111")
-                //console.log(`${newX} > ${boardWidth} AND ${newY} > ${boardHeight}`)
-
                 return false;
             }
 
             // This cell is already occupied.
             if (board[newY][newX] != EMPTY) {
-                //console.log(`${newY}${newX} --> ${board[newY][newX]}`)
-                //console.log("2222222")
-
                 return false;
             }
 
@@ -142,10 +135,13 @@ const mergePiece = (board, shape, offsetX, offsetY) => {
             if (shape[y][x] === EMPTY) {
                 continue;
             }
+            
             let newX = offsetX + x;
             let newY = offsetY + y;
-            //console.log(`It is ${newX} = ${offsetX} + ${x}  --  ${newY} --> ${newBoard[newY][newX]}`)
-            newBoard[newY][newX] = shape[y][x];
+            
+            if (newX >= 0 && newY < boardHeight && newX >= 0 && newX < boardWidth) {
+                newBoard[newY][newX] = shape[y][x];
+            }
         }
     }
     return newBoard;
@@ -158,12 +154,19 @@ const lastRowIsFilled = (board) => {
     // We don't need a double for-loop to verify due to the fact the last row will always exist.
     // So we can just check the last row and see if it is fully blocked. If it is we can clean that row.
     // We add points for clearing the row.
-    console.log("==========");
-    console.log(boardWidth)
     for (let i = 0; i < boardWidth; i++) {
         if (board[boardHeight - 1][i] == EMPTY) {
             // This implies that a cell is EMPTY i.e., no shape is in this cell's position. Thus we know
             // that the user cannot gain any points as the last row is not clear.
+            return false;
+        }
+    }
+    return true;
+}
+
+const towerFilled = (board) => {
+    for (let y = 0; y < board.length; y++) {
+        if (!board[y].some(cell => cell !== EMPTY)) {
             return false;
         }
     }
@@ -185,4 +188,4 @@ const clearLastRow = (oldBoard) => {
     return newBoard;
 }
 
-export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW, canPlace, mergePiece, lastRowIsFilled, shapeColours, clearLastRow };
+export { shapes, createEmptyBoard, createEmptyMatrix, rotateCW, canPlace, mergePiece, lastRowIsFilled, shapeColours, clearLastRow, towerFilled };

@@ -1,14 +1,4 @@
-import { shapes } from "../models";
-
-let shapeColours = {
-    0: "bg-gradient-to-br from-gray-900 to-gray-800",
-    1: "bg-red-500",
-    2: "bg-blue-300",
-    3: "bg-indigo-400",
-    4: "bg-orange-400",
-    5: "bg-green-300"
-};
-
+import { shapes, shapeColours } from "../models";
 
 const Shape = ({ shapeKey }) => {
     let shapesMatrix = shapes[shapeKey];
