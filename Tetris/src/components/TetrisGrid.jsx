@@ -10,15 +10,14 @@ let shapeColours = {
     5: "bg-green-300"
 };
 
-const TetrisGrid = ({ shapeKey, posOfShape, setPosOfShape }) => {
+const TetrisGrid = ({ shapeKey, posOfShape, setPosOfShape, setShape, shapeMatrix, setShapeMatrix, nextShape }) => {
     const [board, setBoard] = useState(() => createEmptyBoard());
-    let shapesMatrix = shapes[shapeKey]
 
     const tryMove = (dx, dy) => {
         let newX = posOfShape.x + dx;
         let newY = posOfShape.y + dy;
 
-        if (canPlace(board, shapesMatrix, newX, newY)) {
+        if (canPlace(board, shapeMatrix, newX, newY)) {
             // Meaning we can indeed move it here to this new position.
             setPosOfShape(prev => ({ x: newX, y: newY }));
             return true;
@@ -31,30 +30,47 @@ const TetrisGrid = ({ shapeKey, posOfShape, setPosOfShape }) => {
     useEffect(() => {
         const handleKeyDown = (e) => {
             if (e.key === "ArrowLeft") {
-                console.log(tryMove(-1, 0))
+                tryMove(-1, 0);
             } else if (e.key === "ArrowRight") {
                 tryMove(1, 0);
+            } else if (e.key === "ArrowUp") {
+                let rotatedShape = rotateCW(shapeMatrix);
+
+                if (canPlace(board, rotatedShape, posOfShape.x, posOfShape.y)) {
+                    console.log("___)))")
+                    setShapeMatrix(rotatedShape);
+                }
             } else if (e.key === "ArrowDown") {
+                console.log("Girgan")
                 if (!tryMove(0, 1)) {
                     // So it failed to go down further. We must lock it onto the board.
-                    setBoard(mergePiece(board, shapesMatrix, posOfShape.x, posOfShape.y));
+                    const shapeKeys = Object.keys(shapes);
+                    setBoard(mergePiece(board, shapeMatrix, posOfShape.x, posOfShape.y));
+                    
+                    // We must now spawn a new shape. We must also reset the position.
+                    console.log("BOOOOOM")
+                    setPosOfShape({ x: 3, y: 0 });
+                    console.log(nextShape)
+                    setShape(nextShape);
+                    
+                    setShapeMatrix(shapes[nextShape]);
                 }
             }
         }
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [posOfShape]);
+    }, [posOfShape, shapeMatrix]);
 
     // We can build a new copy of the board in order to display it.
-    const displayBoard = mergePiece(board, shapesMatrix, posOfShape.x, posOfShape.y);
+    const displayBoard = mergePiece(board, shapeMatrix, posOfShape.x, posOfShape.y);
 
     return (
         <>
             <div className="flex justify-center items-center">
                 <div className="grid grid-cols-10 w-max shadow-2xl">
                     {displayBoard.flat().map((cell, index) => (
-                        <div key={index} className={`w-8 h-8 border border-gray-700 ${cell == 0 ? `bg-transparent` : `bg-red-500`}`}></div>
+                        <div key={index} className={`w-8 h-8 border border-gray-700 ${cell == 0 ? `bg-transparent` : `${shapeColours[cell]}`}`}></div>
                     ))}
                 </div>
             </div>

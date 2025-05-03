@@ -3,34 +3,34 @@ const EMPTY = 0;
 
 const shapes = {
     I: [
-        [0, 0, 0, 0],
         [1, 1, 1, 1],
         [0, 0, 0, 0],
-        [0, 0, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ],
     O: [
+        [0, 2, 2, 0],
+        [0, 2, 2, 0],
         [0, 0, 0, 0],
-        [0, 2, 2, 0],
-        [0, 2, 2, 0],
-        [0, 0, 0, 0]
+        [0, 0, 0, 0],
     ],
     T: [
-        [0, 0, 0, 0],
         [0, 3, 3, 3],
         [0, 0, 3, 0],
-        [0, 0, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ],
     L: [
-        [0, 0, 0, 0],
         [0, 4, 4, 4],
         [0, 0, 0, 4],
-        [0, 0, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ],
     Z: [
-        [0, 0, 0, 0],
         [0, 0, 5, 5],
         [0, 5, 5, 0],
-        [0, 0, 0, 0]
+        [0, 0, 0, 0],
+        [0, 0, 0, 0],
     ],
 };
 
@@ -96,15 +96,18 @@ const canPlace = (board, shape, offsetX, offsetY) => {
             }
             
             // Boundary checks.
-            if (newX < 0 || newX > boardWidth || newY < 0 || newY > boardHeight) {
-                console.log("1")
+
+            if (newX < 0 || newX > boardWidth - 1 || newY < 0 || newY > boardHeight - 1) {
+                console.log("111111")
+                console.log(`${newX} > ${boardWidth} AND ${newY} > ${boardHeight}`)
+
                 return false;
             }
 
             // This cell is already occupied.
             if (board[newY][newX] != EMPTY) {
-                console.log(`${newY}${newX} --> ${board[newY][newX]}`)
-                console.log("2")
+                //console.log(`${newY}${newX} --> ${board[newY][newX]}`)
+                console.log("2222222")
 
                 return false;
             }
@@ -132,7 +135,7 @@ const mergePiece = (board, shape, offsetX, offsetY) => {
             }
             let newX = offsetX + x;
             let newY = offsetY + y;
-            console.log(`It is ${newX} = ${offsetX} + ${x}  --  ${newY} --> ${newBoard[newY][newX]}`)
+            //console.log(`It is ${newX} = ${offsetX} + ${x}  --  ${newY} --> ${newBoard[newY][newX]}`)
             newBoard[newY][newX] = shape[y][x];
         }
     }
