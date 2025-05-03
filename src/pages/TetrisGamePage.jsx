@@ -161,12 +161,11 @@ const TetrisGamePage = () => {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [posOfShape, shapeMatrix]);
 
-
     return (
         <>
             <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
                 <div className="min-h-screen flex justify-center items-center flex-col space-y-[3rem]">
-                    <div className="flex justify-center text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse">Welcome to Tetris</div>
+                    <div className="flex justify-center text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-pulse text-center">Welcome to Tetris</div>
                     
                     <p className="max-w-md text-center text-lg italic text-gray-300 px-4 flex flex-wrap justify-center items-center gap-2">
                         Ready to drop your first piece? Use&nbsp;
@@ -179,7 +178,7 @@ const TetrisGamePage = () => {
                         to rotate. Or tap the controls below—let’s play!
                     </p>
 
-                    <div className="flex gap-5">
+                    <div className="flex gap-5 flex-col sm:flex-row">
                         {shape && <TetrisGrid posOfShape={posOfShape} shapeMatrix={shapeMatrix} points={points} resetGame={resetGame} board={board} gameOver={gameOver} setGameOver={setGameOver} highScore={highScore} />}
                         {shape && <StatusBox points={points} lines={lines} shapeKey={nextShape} resetGame={resetGame} tryMove={tryMove} shapeMatrix={shapeMatrix} setShapeMatrix={setShapeMatrix} board={board} setBoard={setBoard} posOfShape={posOfShape} setPosOfShape={setPosOfShape} spawnNewShape={spawnNewShape} />}
                     </div>

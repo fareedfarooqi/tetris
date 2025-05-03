@@ -25,8 +25,27 @@ const StatusBox = ({ points, lines, shapeKey, resetGame, tryMove, shapeMatrix, s
 
     return (
         <>
-            <div className="flex flex-col space-y-5">
-                <div className="bg-slate-600 rounded-lg w-40 p-4 flex flex-col space-y-4 h-3/5">
+            <div className="flex flex-col">
+                <div className="flex justify-center space-x-2 sm:mb-5 order-1 sm:order-3 mt-5">
+                    <button onClick={() => rotateAction()} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-100 cursor-pointer hover:scale-110">
+                        <IoMdRefresh />
+                    </button>
+
+                    <button onClick={() => tryMove(-1, 0)} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-100 cursor-pointer hover:scale-110">
+                        <IoIosArrowBack />
+                    </button>
+
+                    <button onClick={() => arrowDownAction()} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-100 cursor-pointer hover:scale-110">
+                        <IoIosArrowDown />
+                    </button>
+
+                    <button onClick={() => tryMove(1, 0)} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-100 cursor-pointer hover:scale-110">
+                        <IoIosArrowForward />
+                    </button>
+
+                </div>
+
+                <div className="bg-slate-600 rounded-lg w-40 p-4 flex flex-col space-y-4 h-3/5 order-2">
                     <div className="text-center text-lg font-semibold text-cyan-300 uppercase tracking-wide">Game Stats</div>
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
@@ -47,28 +66,9 @@ const StatusBox = ({ points, lines, shapeKey, resetGame, tryMove, shapeMatrix, s
                     </div>
                 </div>
 
-                <button onClick={resetGame} className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition duration-100 cursor-pointer">
+                <button onClick={resetGame} className="mt-5 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-lg font-semibold shadow-md hover:scale-105 transition duration-100 cursor-pointer order-3">
                     Play Again
                 </button>
-
-                <div className="flex justify-center space-x-2">
-                    <button onClick={() => rotateAction()} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-1-- cursor-pointer hover:scale-110">
-                        <IoMdRefresh />
-                    </button>
-
-                    <button onClick={() => tryMove(-1, 0)} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-1-- cursor-pointer hover:scale-110">
-                        <IoIosArrowBack />
-                    </button>
-
-                    <button onClick={() => arrowDownAction()} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-1-- cursor-pointer hover:scale-110">
-                        <IoIosArrowDown />
-                    </button>
-
-                    <button onClick={() => tryMove(1, 0)} className="bg-gray-600 hover:bg-gray-700 text-white p-2 rounded-md shadow-md transition duration-1-- cursor-pointer hover:scale-110">
-                        <IoIosArrowForward />
-                    </button>
-
-                </div>
             </div>
         </>
     )
