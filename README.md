@@ -21,9 +21,8 @@
 
 ## 📺 Demo
 
-> **Live Preview:**  
-> _(NEEEEEED TO REPLACE)_  
-> https://your-tetris-app.netlify.app  
+> **Live Preview:**   
+> [https://your-tetris-app.netlify.app  ](https://tetris-one-dusky.vercel.app/)
 
 ---
 
